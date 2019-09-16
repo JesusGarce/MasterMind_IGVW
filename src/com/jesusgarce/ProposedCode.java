@@ -2,34 +2,29 @@ package com.jesusgarce;
 
 import java.util.ArrayList;
 
- class TokenManager {
+import static com.jesusgarce.MasterMind.CODE_SIZE;
 
-    TokenManager(){ }
+class ProposedCode extends Code {
+    private Result result;
 
-    private Token getTokenRandom() {
-        return getTokens()[(int)(Math.random() * 6 + 0)];
-    }
+    ProposedCode(String proposedCodeString) {
+        super();
+        ArrayList<Token> proposedCodeArray = new ArrayList<>();
 
-    private Token[] getTokens(){
-        return Token.values();
-    }
-
-    ArrayList<Token> getCode() {
-        ArrayList<Token> code = new ArrayList<>();
-        int index = 0;
-
-        while (index < 4){
-            Token token = getTokenRandom();
-            if (!existToken(code, token)) {
-                code.add(index,token);
-                index++;
+        for (int i = 0; i < CODE_SIZE; i++){
+            char proposedCodeChar = proposedCodeString.charAt(i);
+            if (isToken(proposedCodeChar)) {
+                Token token = createToken(proposedCodeChar);
+                if (token != null)
+                    proposedCodeArray.add(token);
             }
         }
 
-        return code;
+        if (proposedCodeArray.size() == CODE_SIZE)
+            this.code = proposedCodeArray;
     }
 
-     boolean isToken(Character tokenChar){
+    private boolean isToken(Character tokenChar){
         tokenChar = Character.toUpperCase(tokenChar);
 
         if ( (tokenChar.toString().equals(Token.R.toString())) || (tokenChar.toString().equals(Token.B.toString())) ||
@@ -40,7 +35,7 @@ import java.util.ArrayList;
             return false;
     }
 
-     Token createToken(Character tokenChar){
+    private Token createToken(Character tokenChar){
         tokenChar = Character.toUpperCase(tokenChar);
 
         switch(tokenChar) {
@@ -60,7 +55,10 @@ import java.util.ArrayList;
         return null;
     }
 
-    private boolean existToken(ArrayList<Token> code, Token token){
-        return code.contains(token);
+    Result getResult() {
+        return result;
+    }
+    void setResult(Result result) {
+        this.result = result;
     }
 }

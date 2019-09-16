@@ -114,3 +114,84 @@ semejante se definan los mismos nombres
 * No se han cumplido los estándares de la industria en algunos casos, como en el retorno del método
 checkAttempts() que en caso de error no retorna -1, sino 1.
 
+== Segunda iteración
+
+=== Introducción
+
+En esta segunda iteración se ha realizado un MasterMind con siete clases Java, siendo una de ellas un enumerador.
+Sigue siendo versión funcional en la que el usuario por consola pasa los códigos y el emulador le da una
+respuesta a ese código.
+
+=== Diseño
+
+Como se puede ver en la Figura 2, tenemos un enumerador Token que se refiere a una ficha. La clase Code se refiere
+a cada código de cuatro fichas, y de esta clase heredan dos clases ProposedCode y SecretCode. La clase
+ProposedCode se refiere a un código propuesto y tiene un resultado. Esta clase se encarga de crear un código
+a partir de la información enviada por el usuario es válido y de almacenar un objeto de la clase Result que contiene
+los muertos y heridos de ese código propuesto. La clase SecretCode es el código secreto que el usuario tiene
+que adivinar. Esta clase comprueba el String enviado por el usuario y retorna la comparación entre el código
+propuesto y el código secreto. Además, almacena en un array de ProposedCode todos los códigos que han sido
+propuestos en la partida.
+
+Las clases SecretCode, ProposedCode y Result componen el MasterMind. La clase MasterMind es la encargada de
+empezar la partida y de interactuar con el usuario. Almacena los intentos del usuario y el código secreto, y
+se encarga de solicitar al código secreto que compruebe el String enviado por el usuario. En definitiva, lleva a
+cabo el control de la partida.
+
+image::UML-v2.png[Diagrama de clases]
+
+=== Aspectos a mejorar
+
+Existen clases que realizan operaciones de las cuales no son responsables, por tanto la responsabilidad aún puede
+mejorarse. Nuestro MasterMind dista mucho de tener un diseño modular, por tanto tenemos que mejorar el diseño para
+hacerlo modular. Para ello, necesitamos:
+
+* Alta cohesión. Nuestro código no tiene alta cohesión en este momento, existen métodos como checkAndSaveProposedCode()
+de la clase SecretCode que tiene dos responsabilidades, por tanto, tenemos que hacer que este método solo tenga
+una responsabilidad, o chequear el código propuesto o almacenarlo.
+
+* Bajo acoplamiento. De momento nuestro código, al no tener muchas clases, no tiene problemas de acoplamiento. La clase
+que tiene más clases dependientes es MasterMind con tres.
+
+* Tamaño pequeño. Tenemos que chequear todas nuestras clases, métodos y paquetes para que no superen las métricas definidas
+como aceptables. Por ejemplo, el método Main tiene más de 25 líneas de código, por tanto es mejorable.
+
+Existen numerables ejemplos de Programación Defensiva en nuestro código que tenemos que eliminar, usando asserts en
+su lugar. De esta forma, gestionamos las precondiciones y las postcondiciones de cada método. Hemos aplicado esto en todo
+nuestro código excepto en la entrada del usuario.
+
+Se deben realizar una distribución de las responsabilidades de forma equilibrada en lugar de tener clases de Datos
+sin responsabilidad y que su responsabilidad sea realizada por otra clase que realiza trabajo de más.
+En nuestra segunda versión, la clase MasterMind y la clase SecretCode realizaban casi todo
+el trabajo, mientras que ahora cada clase se encarga de hacer su parte, evitando así clases
+"cotillas", que mediante "gets" realizan operaciones que no le corresponden.
+
+==== Principio de menor compromiso
+
+Se deben crear interfaces que proporcionen el comportamiento esencial. Por tanto se necesita una vista de la clase Result,
+una vista de la clase ProposedCode, una vista de la clase SecretCode y una vista del enumerado Token. Todo esto
+irá integrado en una clase GameView, mientras que los datos irán integrados en una clase Game. Las vistas deben estar
+asociadas a una partida. De esta forma, todos las operaciones relacionadas con la ejecución por
+consola se realizarán dentro de las clases View, y en las clases de datos solo se realizarán
+operaciones con los datos.
+
+==== Principio de única responsabilidad
+
+Este principio nos dice que una clase debería tener solo un único mótivo de cambio. En nuestro caso, la clase MasterMind
+cambiaría si se cambia la interfaz de usuario, y además es responsable de la ejecución del juego. Por tanto, tiene
+dos motivos de cambio y debe ser modificada. Por tanto, partimos la clase, creando una clase para la interfaz de
+usuario y otra clase para la ejecución. Este es otro motivo por el que se deben crear clases vista
+de todas las clases de datos que tenemos actualmente.
+
+==== Clases de Datos
+
+Existen clases de datos que solo tienen métodos Get/Set sin ninguna otra responsabilidad, son clases que necesitan
+adquirir alguna responsabilidad.
+
+==== Principio de Demeter
+
+No se debe enviar nunca a otros objetos indirectos obtenidos como resultado de un mensaje a un objeto de conocimiento
+directo. Este caso era muy común en nuestro cógido y por tanto, hemos intentado evitar tratar
+con un objeto que ha sido pedido mediante método Get.
+
+
