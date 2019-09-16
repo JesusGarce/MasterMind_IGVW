@@ -1,0 +1,116 @@
+= Memoria MasterMind IWVG
+
+Esta práctica consiste en la realización de un simulador del famoso juego MasterMind
+desde una primera versión muy básicas con numerosos errores hasta una versión final depurada
+a partir de los conocimientos obtenidos en esta asignatura.
+
+== Primera iteración
+
+=== Introducción
+
+En esta primera versión se ha realizado un MasterMind con tres clases Java y un enumerador Token.
+Es una versión funcional en la que el usuario por consola pasa los códigos y el emulador le da una
+respuesta a ese código.
+
+=== Diseño
+
+Como se puede ver en la Figura 1, tenemos un enumerador Token que se refiere a una ficha y una clase
+TokenManager que contiene todas las funciones correspondientes a la gestión de fichas. Se ha desarrollado
+la clase MasterMind que sería el tablero, que contiene todas las fichas, los intentos, el código
+y los aciertos de cada intento. Por último, tenemos la clase Console que es la clase donde se ejecuta
+el programa.
+
+image::UML-v1.png[Diagrama de clases]
+
+=== Aspectos a mejorar
+
+En primer lugar, vemos que nuestra programación no ha sido totalmente orientada a objetos ni
+se ha realizado un análisis del modelo del dominio, por tanto, existen clases que en el dominio del MasterMind
+no tienen cabida. Para mejorar esto, hemos realizado un análisis del dominio llegando a la conclusión de que
+es necesario crear una clase Code referida a la combinación de colores de cada partida. De esta clase
+Code heredara la clase ProposedCode que se refiere a la combinación de colores elegida por el jugador
+en cada turno y también heredara la clase SecretCode que se refiere al código secreto de cada partida.
+
+Además, las muertes y heridos se guardan en dos parámetros dentro de la clase MasterMind cuando en realidad
+estos datos se podrían guardar dentro de una clase Result que le diga al cliente si el usuario ha ganado o no.
+
+Por otro lado, MasterMind era anteriormente una clase que se encargaba de gestionar todo el juego, con estos cambios
+MasterMind tendrá relaciones de asociación con los distintos objetos, en lugar de llevar ella todo el trabajo.
+De esta manera hacemos una división de responsabilidades, en lugar de que la clase MasterMind lleve el gran peso de
+nuestro programa.
+
+Para que nuestro código sea más sencillo; eliminamos el método que reinicia el MasterMind puesto que es un
+método estático sin parámetros. Además, cambiamos el nombre del método "checkAttempt" puesto que en realidad este
+método chequea, pero además almacena, por tanto el nombre no es correcto y puede llevar a error.
+
+Con respecto a la relaciones, en la primera versión teniamos relaciones de composición entre el enumerado Token
+y la clase TokenManager, la cual se encargaba de toda la gestión del enumerado. La clase TokenManager tenía
+una relación de composición con la clase MasterMind, ya que MasterMind le pedía datos constantemente
+a la clase TokenManager.
+
+Por último, vemos innecesaria una clase solamente para el método main, el cual podría incluirse dentro de la
+clase MasterMind.
+
+=== Calidad del Software
+
+Con respecto a los diferentes parámetros que definen la Calidad del Software vemos necesarias estas
+mejoras en los siguientes parámetros.
+
+==== Seguridad
+
+Nos vemos en la necesidad de comprobar para diversas funciones que los parámetros recibidos son
+correctos y no se han recibido parámetros indebidos, cosa que en esta primera versión no se ha hecho. Nos
+aseguramos de que cada clase modifique y gestione solamente sus datos y no haya clases "cotillas"
+que hagan el trabajo que deberían hacer otras clases. Como nuestro MasterMind, que hacia trabajo que
+realmente le correspondía a otras clases.
+
+==== Portabilidad
+
+Adaptamos el código para que los datos puedan usarse tanto en una interfaz gráfica como en la consola,
+o en posibles interfaces futuras.
+
+
+=== Mantenibilidad
+
+Con respecto a los diferentes parámetros que definen la mantenibilidad del Software vemos necesario las
+siguientes mejoras en los diferentes parámetros.
+
+===== Viscosidad
+
+Existen nombres de métodos en esta versión que pueden ser confusos, ya que no se distinguen entre
+los Tokens referidos a las fichas de colores y los Tokens referidos a las fichas de aciertos (blancas y rojas).
+Por tanto, se ha cambiado el nombre del método getAttemptsTokens que devuelve la lista de todos
+los aciertos de cada turno y las fichas de acierto serán una clase aparte llamada Result.
+
+Por otro lado, existen diversos "while" que se ejecutan en el método Main con variables que están
+nombradas de manera incorrecta o no tan clara como podría definirse.
+
+===== Rigidez
+
+Nada destacable.
+
+===== Fragilidad
+
+Para mejorar la fragilidad del código, convertir en constantes aquellos "números mágicos" que aparecen
+en el código, por ejemplo aquellos números referidos a la cantidad de fichas en cada combinación (
+podría ser 5 en lugar de 4, o 3 ).
+
+===== Inmovilidad
+
+Buscamos que sea reusable en el futuro. Por tanto nos adaptamos a los estandares de Java. Existe la función
+checkAttempt() que devuelve un entero según el estado. En caso de error devolvemos el entero 1 o 2,
+cuando por estandar se debería devolver -1 en caso de error.
+
+=== Legibilidad
+
+Nuestro código tiene violaciones de la legibilidad:
+
+* Existen nombres en las variables que pueden ser confusos o que no representan fielmente a esa variable en sí
+o pueden ser confusas y/o no comprensibles.
+
+* Nos fijamos en que todas las variables, clases y métodos que se refieran a lo mismo o tengan una funcionalidad
+semejante se definan los mismos nombres
+
+* No se han cumplido los estándares de la industria en algunos casos, como en el retorno del método
+checkAttempts() que en caso de error no retorna -1, sino 1.
+
