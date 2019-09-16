@@ -20,7 +20,10 @@ la clase MasterMind que sería el tablero, que contiene todas las fichas, los in
 y los aciertos de cada intento. Por último, tenemos la clase Console que es la clase donde se ejecuta
 el programa.
 
-image::UML-v1.png[Diagrama de clases]
+.Diagrama de clases de la primera versión de MasterMind
+[#img-first-mastermind]
+[caption="Figure 1: "]
+image::UML-v1.png[Diagrama de clases primera versión]
 
 === Aspectos a mejorar
 
@@ -138,7 +141,10 @@ empezar la partida y de interactuar con el usuario. Almacena los intentos del us
 se encarga de solicitar al código secreto que compruebe el String enviado por el usuario. En definitiva, lleva a
 cabo el control de la partida.
 
-image::UML-v2.png[Diagrama de clases]
+.Diagrama de clases de la segunda versión de MasterMind
+[#img-second-mastermind]
+[caption="Figure 2: "]
+image::UML-v2.png[Diagrama de clases segunda versión]
 
 === Aspectos a mejorar
 
@@ -220,7 +226,10 @@ y ProposedCode. La otra es el enumerador Token, el cual simplemente no es necesa
 una clase vista puesto que al ser simplemente un caracter no es necesario tratarlo de ninguna
 forma especial para mostrarlo por pantalla.
 
-image::UML-v3.png[Diagrama de clases]
+.Diagrama de clases de la tercera versión de MasterMind
+[#img-third-mastermind]
+[caption="Figure 3: "]
+image::UML-v3.png[Diagrama de clases tercera versión]
 
 Hemos considerado algunos cambios en el diseño con respecto a las iteraciones anteriores
 debido a que cuadran mejor con nuestra idea del juego MasterMind. Ahora, el conjunto de
