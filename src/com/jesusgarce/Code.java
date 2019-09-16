@@ -2,7 +2,7 @@ package com.jesusgarce;
 
 import java.util.ArrayList;
 
-class Code {
+abstract class Code {
     ArrayList<Token> code;
 
     Code() {
@@ -12,6 +12,5 @@ class Code {
     ArrayList<Token> getCode() {
         return code;
     }
-
 
 }

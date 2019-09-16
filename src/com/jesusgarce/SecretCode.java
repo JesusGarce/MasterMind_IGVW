@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import static com.jesusgarce.MasterMind.CODE_SIZE;
 
 class SecretCode extends Code {
-    private ArrayList<ProposedCode> proposedCodes;
 
     SecretCode() {
         super();
@@ -20,17 +19,11 @@ class SecretCode extends Code {
             }
         }
 
-        this.proposedCodes = new ArrayList<>();
         this.code = code;
-
     }
 
-    ProposedCode checkAndSaveProposedCode(String stringProposedCode){
-        ProposedCode proposedCode = new ProposedCode(stringProposedCode);
+    Result checkProposedCode(ProposedCode proposedCode){
         ArrayList<Token> codeProposedCode = proposedCode.getCode();
-
-        if (codeProposedCode.size() == 0)
-            return proposedCode;
 
         int deads = 0;
         int woundeds = 0;
@@ -44,11 +37,7 @@ class SecretCode extends Code {
             }
         }
 
-        proposedCode.setResult(new Result(deads,woundeds));
-
-        this.proposedCodes.add(proposedCode);
-
-        return proposedCode;
+        return new Result(deads,woundeds);
     }
 
     private Token getTokenRandom() {
@@ -59,11 +48,6 @@ class SecretCode extends Code {
         return code.contains(token);
     }
 
-    ArrayList<Token> getSecretCode() {
-        return code;
-    }
+    ArrayList<Token> getSecretCode() { return code; }
 
-    ArrayList<ProposedCode> getProposedCodes() {
-        return proposedCodes;
-    }
 }

@@ -13,9 +13,9 @@ class ProposedCode extends Code {
 
         for (int i = 0; i < CODE_SIZE; i++){
             char proposedCodeChar = proposedCodeString.charAt(i);
-            if (isToken(proposedCodeChar)) {
-                Token token = createToken(proposedCodeChar);
-                if (token != null)
+            if (Token.isToken(proposedCodeChar)) {
+                Token token = Token.createToken(proposedCodeChar);
+                if ((token != null) && !(proposedCodeArray.contains(token)))
                     proposedCodeArray.add(token);
             }
         }
@@ -24,40 +24,16 @@ class ProposedCode extends Code {
             this.code = proposedCodeArray;
     }
 
-    private boolean isToken(Character tokenChar){
-        tokenChar = Character.toUpperCase(tokenChar);
-
-        if ( (tokenChar.toString().equals(Token.R.toString())) || (tokenChar.toString().equals(Token.B.toString())) ||
-                (tokenChar.toString().equals(Token.Y.toString())) || (tokenChar.toString().equals(Token.G.toString())) ||
-                (tokenChar.toString().equals(Token.O.toString())) || (tokenChar.toString().equals(Token.P.toString())))
-            return true;
-        else
-            return false;
+    boolean codeIsEmpty(){
+        return code.isEmpty();
     }
 
-    private Token createToken(Character tokenChar){
-        tokenChar = Character.toUpperCase(tokenChar);
-
-        switch(tokenChar) {
-            case 'R':
-                return Token.R;
-            case 'B':
-                return Token.B;
-            case 'Y':
-                return Token.Y;
-            case 'G':
-                return Token.G;
-            case 'O':
-                return Token.O;
-            case 'P':
-                return Token.P;
-        }
-        return null;
-    }
+    boolean isWinner() { return result.isWinner();}
 
     Result getResult() {
         return result;
     }
+
     void setResult(Result result) {
         this.result = result;
     }

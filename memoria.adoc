@@ -195,3 +195,57 @@ directo. Este caso era muy común en nuestro cógido y por tanto, hemos intentad
 con un objeto que ha sido pedido mediante método Get.
 
 
+== Tercera iteración
+
+=== Introducción
+
+En esta iteración tenemos ya un código modular en el que tenemos clases de datos que realizan
+todas las operaciones y clases vista que se encargan de mostrar estos datos al usuario por
+consola. Las clases de datos no tienen ningún tipo de dependencia de las clases vista.
+Además, Hemos asignado a cada clase la responsabilidad que consideramos que debería tener
+según nuestro diseño. Vuelve a ser una iteración totalmente funcional.
+
+=== Diseño
+
+Como podemos ver en la Figura 3, tenemos 13 clases Java, separando los datos de la vista. Las
+clase MasterMind vuelve a ser la clase principal y a partir de la cual se ejecuta nuestro
+programa. Las clases vista estan gestionadas desde la clase GameView con relaciones de
+composición. Lo mismo pasa con lasa clases de datos y la clase Game, la cual esta
+compuesta del resto de clases de datos. Para asignarle a cada clase sus responsabilidades
+todas las clses vista tienen al menos, la responsabilidad de mostrarse por pantalla
+de manera correcta mediante un método "print()". Existen dos clases de datos que no tienen
+una clase  equivalente vista. Una de ellas es la clase Code, ya que esta clase la hemos considerado clase abstracta
+debido que no creamos objetos de esta clase, sino que es una clase padre de SecretCode
+y ProposedCode. La otra es el enumerador Token, el cual simplemente no es necesario tener
+una clase vista puesto que al ser simplemente un caracter no es necesario tratarlo de ninguna
+forma especial para mostrarlo por pantalla.
+
+image::UML-v3.png[Diagrama de clases]
+
+Hemos considerado algunos cambios en el diseño con respecto a las iteraciones anteriores
+debido a que cuadran mejor con nuestra idea del juego MasterMind. Ahora, el conjunto de
+códigos propuestos lo almacena la clase Game en lugar de almacenarlo la clase
+SecretCode como haciamos anteriormente, ya que no considerabamos que gestionar
+los códigos propuestos fuera trabajo del código secreto. La responsabilidad de esta clase
+es decir el resultado de ese código propuesto, pero no almacenarlo. Otro cambio realizado
+ha sido el de asignarle al enumerado Token la responsabilidad de comprobar si un
+caracter cualquiera es un Token y la de crear un Token a partir de un caracter,
+responsabilidades anteriormente asignadas a la clase ProposedCode lo cual no lo veíamos
+totalmente apropiado.
+
+En cuanto al cambios de responsabilidades, el encargado de decir ahora si una combinación
+propuesta es o no ganadora es la clase Result, algo que debería haber sido desde el
+princpio, en lugar de que la clase SecretCode pida el objeto para ver si es o no ganador.
+Cambios como este han sido muy comunes en la nueva versión del MasterMind.
+
+En lo referido a relaciones, entre las clases vista y datos hay una relación de asociación, mientras
+que entre las clases de datos y Game hay una relación de composición, igual pasa con las clases
+vista y la clase GameView. La clase MasterMind esta compuesta de la clase de datos Game
+y de la clase de vistas GameView. Además, hay una relación de asociación entre las clases
+Game y GameView. Por otro lado SecretCode tiene una relación de uso con Result y una relación de asociación
+con ProposedCode. Existe una clase de herencia entre la clase Code y las clases SecretCode y ProposedCode.
+Esta clase Code se relaciona también con el enumerado Token con una relación de composición.
+
+Por último, hemos disminuido el tamaño de las clases y/o métodos que teniamos más grandes
+dividiendolos en funciones o asignando responsabilidades a otras clases. Es el caso de
+GameView, que es nuestro método más grande pero ya no tiene más de 25 líneas de código.
