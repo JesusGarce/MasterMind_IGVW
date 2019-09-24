@@ -1,4 +1,6 @@
-package com.jesusgarce;
+package com.jesusgarce.views;
+
+import com.jesusgarce.models.SecretCode;
 
 class SecretCodeView {
     private SecretCode secretCode;

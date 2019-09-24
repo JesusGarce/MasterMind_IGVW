@@ -1,8 +1,8 @@
-package com.jesusgarce;
+package com.jesusgarce.models;
 
 import static com.jesusgarce.MasterMind.CODE_SIZE;
 
-class Result {
+public class Result {
     private int deads;
     private int woundeds;
 
@@ -15,11 +15,11 @@ class Result {
         return (this.deads == CODE_SIZE);
     }
 
-    int getDeads() {
+    public int getDeads() {
         return deads;
     }
 
-    int getWoundeds() {
+    public int getWoundeds() {
         return woundeds;
     }
 }

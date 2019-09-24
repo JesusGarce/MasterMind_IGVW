@@ -1,4 +1,4 @@
-package com.jesusgarce;
+package com.jesusgarce.models;
 
 import java.util.ArrayList;
 

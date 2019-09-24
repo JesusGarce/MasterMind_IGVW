@@ -1,22 +1,24 @@
-package com.jesusgarce;
+package com.jesusgarce.models;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static com.jesusgarce.MasterMind.CODE_SIZE;
 
-class SecretCode extends Code {
+public class SecretCode extends Code {
 
     SecretCode() {
         super();
         ArrayList<Token> code = new ArrayList<>();
         int index = 0;
 
+        ArrayList<Token> token_values = new ArrayList<>(Arrays.asList(Token.values()));
+
         while (index < CODE_SIZE){
-            Token token = getTokenRandom();
-            if (!existToken(code, token)) {
-                code.add(index,token);
-                index++;
-            }
+            Token token = token_values.get((int) (Math.random() * token_values.size()));
+            token_values.remove(token);
+            code.add(index,token);
+            index++;
         }
 
         this.code = code;
@@ -40,14 +42,6 @@ class SecretCode extends Code {
         return new Result(deads,woundeds);
     }
 
-    private Token getTokenRandom() {
-        return Token.values()[(int)(Math.random() * 6 + 0)];
-    }
-
-    private boolean existToken(ArrayList<Token> code, Token token){
-        return code.contains(token);
-    }
-
-    ArrayList<Token> getSecretCode() { return code; }
+    public ArrayList<Token> getSecretCode() { return code; }
 
 }

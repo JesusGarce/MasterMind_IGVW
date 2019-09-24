@@ -1,10 +1,13 @@
 package com.jesusgarce;
 
+import com.jesusgarce.models.Game;
+import com.jesusgarce.views.GameView;
+
 import java.io.IOException;
 
 public class MasterMind {
-    static final int CODE_SIZE = 4;
-    static final int MAX_ATTEMPTS = 10;
+    public static final int CODE_SIZE = 4;
+    public static final int MAX_ATTEMPTS = 10;
     private GameView view;
     private Game game;
 

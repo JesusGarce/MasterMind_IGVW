@@ -1,4 +1,6 @@
-package com.jesusgarce;
+package com.jesusgarce.views;
+
+import com.jesusgarce.models.Result;
 
 class ResultView {
     private Result result;

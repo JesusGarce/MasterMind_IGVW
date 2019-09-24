@@ -1,15 +1,15 @@
-package com.jesusgarce;
+package com.jesusgarce.models;
 
 import java.util.ArrayList;
 
 import static com.jesusgarce.MasterMind.MAX_ATTEMPTS;
 
-class Game {
+public class Game {
     private SecretCode secretCode;
     private int attempts;
     private ArrayList<ProposedCode> proposedCodes;
 
-    Game() {
+    public Game() {
         this.initialize();
     }
 

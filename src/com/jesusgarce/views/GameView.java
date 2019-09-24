@@ -1,4 +1,6 @@
-package com.jesusgarce;
+package com.jesusgarce.views;
+
+import com.jesusgarce.models.Game;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,16 +9,16 @@ import java.io.InputStreamReader;
 import static com.jesusgarce.MasterMind.CODE_SIZE;
 import static com.jesusgarce.MasterMind.MAX_ATTEMPTS;
 
-class GameView {
+public class GameView {
     private Game game;
     private boolean playing = true;
     private boolean continuePlaying = true;
 
-    GameView(Game game){
+    public GameView(Game game){
         this.game = game ;
     }
 
-    void interact() throws IOException {
+    public void interact() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         do {

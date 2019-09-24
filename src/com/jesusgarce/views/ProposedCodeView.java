@@ -1,4 +1,6 @@
-package com.jesusgarce;
+package com.jesusgarce.views;
+
+import com.jesusgarce.models.ProposedCode;
 
 class ProposedCodeView {
     private ProposedCode proposedCode;

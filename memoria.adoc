@@ -25,6 +25,7 @@ el programa.
 [caption="Figure 1: "]
 image::UML-v1.png[Diagrama de clases primera versión]
 
+
 === Aspectos a mejorar
 
 En primer lugar, vemos que nuestra programación no ha sido totalmente orientada a objetos ni
@@ -44,7 +45,8 @@ nuestro programa.
 
 Para que nuestro código sea más sencillo; eliminamos el método que reinicia el MasterMind puesto que es un
 método estático sin parámetros. Además, cambiamos el nombre del método "checkAttempt" puesto que en realidad este
-método chequea, pero además almacena, por tanto el nombre no es correcto y puede llevar a error.
+método chequea, pero además almacena, por tanto el nombre no es correcto y puede llevar a error según
+el Principio de Menor Sorpresa.
 
 Con respecto a la relaciones, en la primera versión teniamos relaciones de composición entre el enumerado Token
 y la clase TokenManager, la cual se encargaba de toda la gestión del enumerado. La clase TokenManager tenía
@@ -138,13 +140,14 @@ propuestos en la partida.
 
 Las clases SecretCode, ProposedCode y Result componen el MasterMind. La clase MasterMind es la encargada de
 empezar la partida y de interactuar con el usuario. Almacena los intentos del usuario y el código secreto, y
-se encarga de solicitar al código secreto que compruebe el String enviado por el usuario. En definitiva, lleva a
+se encarga de solicitar a SecretCode que compruebe el String enviado por el usuario. En definitiva, lleva a
 cabo el control de la partida.
 
 .Diagrama de clases de la segunda versión de MasterMind
 [#img-second-mastermind]
 [caption="Figure 2: "]
 image::UML-v2.png[Diagrama de clases segunda versión]
+
 
 === Aspectos a mejorar
 
@@ -231,6 +234,7 @@ forma especial para mostrarlo por pantalla.
 [caption="Figure 3: "]
 image::UML-v3.png[Diagrama de clases tercera versión]
 
+
 Hemos considerado algunos cambios en el diseño con respecto a las iteraciones anteriores
 debido a que cuadran mejor con nuestra idea del juego MasterMind. Ahora, el conjunto de
 códigos propuestos lo almacena la clase Game en lugar de almacenarlo la clase
@@ -245,7 +249,8 @@ totalmente apropiado.
 En cuanto al cambios de responsabilidades, el encargado de decir ahora si una combinación
 propuesta es o no ganadora es la clase Result, algo que debería haber sido desde el
 princpio, en lugar de que la clase SecretCode pida el objeto para ver si es o no ganador.
-Cambios como este han sido muy comunes en la nueva versión del MasterMind.
+Cambios como este han sido muy comunes en la nueva versión del MasterMind en la cual se han
+cuidado las peticiones Get.
 
 En lo referido a relaciones, entre las clases vista y datos hay una relación de asociación, mientras
 que entre las clases de datos y Game hay una relación de composición, igual pasa con las clases
@@ -258,3 +263,4 @@ Esta clase Code se relaciona también con el enumerado Token con una relación d
 Por último, hemos disminuido el tamaño de las clases y/o métodos que teniamos más grandes
 dividiendolos en funciones o asignando responsabilidades a otras clases. Es el caso de
 GameView, que es nuestro método más grande pero ya no tiene más de 25 líneas de código.
+
