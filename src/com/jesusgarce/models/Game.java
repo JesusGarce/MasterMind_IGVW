@@ -13,13 +13,13 @@ public class Game {
         this.initialize();
     }
 
-    void initialize(){
+    public void initialize(){
         this.secretCode = new SecretCode();
         this.attempts = 0;
         this.proposedCodes = new ArrayList<>();
     }
 
-    boolean createProposedCode(String proposedCodeString){
+    public boolean createProposedCode(String proposedCodeString){
         ProposedCode proposedCode = new ProposedCode(proposedCodeString);
 
         if (proposedCode.codeIsEmpty())
@@ -36,11 +36,11 @@ public class Game {
         return proposedCodes.remove(proposedCodes.size()-1);
     }
 
-    void addAtempt(){
+    public void addAtempt(){
         attempts++;
     }
 
-    boolean isWinner(){
+    public boolean isWinner(){
         ProposedCode proposedCode = this.getLastProposedCode();
         proposedCode.setResult(secretCode.checkProposedCode(proposedCode));
 
@@ -49,17 +49,17 @@ public class Game {
         return proposedCode.isWinner();
     }
 
-    boolean attemptsRemained(){
+    public boolean attemptsRemained(){
         return (attempts < MAX_ATTEMPTS);
     }
 
-    SecretCode getSecretCode() { return secretCode;}
+    public SecretCode getSecretCode() { return secretCode;}
 
-    int getAttempts() {
+    public int getAttempts() {
         return attempts;
     }
 
-    ArrayList<ProposedCode> getProposedCodes() {
+    public ArrayList<ProposedCode> getProposedCodes() {
         return proposedCodes;
     }
 

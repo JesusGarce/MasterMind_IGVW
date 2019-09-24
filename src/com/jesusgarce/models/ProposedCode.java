@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import static com.jesusgarce.MasterMind.CODE_SIZE;
 
-class ProposedCode extends Code {
-    private Result result;
+public class ProposedCode extends Code {
+    protected Result result;
 
     ProposedCode(String proposedCodeString) {
         super();
@@ -30,11 +30,12 @@ class ProposedCode extends Code {
 
     boolean isWinner() { return result.isWinner();}
 
-    Result getResult() {
-        return result;
-    }
 
     void setResult(Result result) {
         this.result = result;
+    }
+
+    public Result getResult() {
+        return result;
     }
 }
