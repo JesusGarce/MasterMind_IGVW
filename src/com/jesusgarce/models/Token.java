@@ -14,10 +14,10 @@ public enum Token {
             return false;
     }
 
-    static Token createToken(Character tokenChar){
+    static Token createToken(Character tokenChar) {
         tokenChar = Character.toUpperCase(tokenChar);
 
-        switch(tokenChar) {
+        switch (tokenChar) {
             case 'R':
                 return Token.R;
             case 'B':

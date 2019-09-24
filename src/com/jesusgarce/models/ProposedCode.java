@@ -11,7 +11,7 @@ public class ProposedCode extends Code {
         super();
         ArrayList<Token> proposedCodeArray = new ArrayList<>();
 
-        for (int i = 0; i < CODE_SIZE; i++){
+        for (int i = 0; i < CODE_SIZE; i++) {
             char proposedCodeChar = proposedCodeString.charAt(i);
             if (Token.isToken(proposedCodeChar)) {
                 Token token = Token.createToken(proposedCodeChar);
@@ -24,18 +24,19 @@ public class ProposedCode extends Code {
             this.code = proposedCodeArray;
     }
 
-    boolean codeIsEmpty(){
+    boolean codeIsEmpty() {
         return code.isEmpty();
     }
 
-    boolean isWinner() { return result.isWinner();}
-
-
-    void setResult(Result result) {
-        this.result = result;
+    boolean isWinner() {
+        return result.isWinner();
     }
 
     public Result getResult() {
         return result;
+    }
+
+    void setResult(Result result) {
+        this.result = result;
     }
 }

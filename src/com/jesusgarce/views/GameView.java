@@ -14,8 +14,8 @@ public class GameView {
     private boolean playing = true;
     private boolean continuePlaying = true;
 
-    public GameView(Game game){
-        this.game = game ;
+    public GameView(Game game) {
+        this.game = game;
     }
 
     public void interact() throws IOException {
@@ -25,7 +25,7 @@ public class GameView {
             System.out.println("MASTER MIND");
             System.out.println("----------------------------------------------------------------------------------------------");
 
-            while(playing) {
+            while (playing) {
                 printProposedCodesArray();
 
                 System.out.println("Código a descubrir: **** | Intentos restantes: " + (MAX_ATTEMPTS - game.getAttempts()) + " | Dime tu código: ");
@@ -49,11 +49,11 @@ public class GameView {
             }
 
             if (!game.attemptsRemained())
-                System.out.println("¡HAS PERDIDO! Consumiste todos tus intentos. La partida se ha acabado. El código era: "+new SecretCodeView(game.getSecretCode()).print());
+                System.out.println("¡HAS PERDIDO! Consumiste todos tus intentos. La partida se ha acabado. El código era: " + new SecretCodeView(game.getSecretCode()).print());
 
             continuePlaying = printPlayAgain();
 
-        } while(continuePlaying);
+        } while (continuePlaying);
     }
 
     private boolean printPlayAgain() throws IOException {
@@ -74,8 +74,8 @@ public class GameView {
         }
     }
 
-    private void printProposedCodesArray(){
-        for (int i = 0; i < game.getProposedCodes().size(); i++){
+    private void printProposedCodesArray() {
+        for (int i = 0; i < game.getProposedCodes().size(); i++) {
             ProposedCodeView proposedCodeView = new ProposedCodeView(game.getProposedCodes().get(i));
             ResultView resultView = new ResultView(game.getProposedCodes().get(i).getResult());
             System.out.print("Intento " + (i + 1) + ": ");

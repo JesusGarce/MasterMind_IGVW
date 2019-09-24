@@ -14,17 +14,17 @@ public class SecretCode extends Code {
 
         ArrayList<Token> token_values = new ArrayList<>(Arrays.asList(Token.values()));
 
-        while (index < CODE_SIZE){
+        while (index < CODE_SIZE) {
             Token token = token_values.get((int) (Math.random() * token_values.size()));
             token_values.remove(token);
-            code.add(index,token);
+            code.add(index, token);
             index++;
         }
 
         this.code = code;
     }
 
-    Result checkProposedCode(ProposedCode proposedCode){
+    Result checkProposedCode(ProposedCode proposedCode) {
         ArrayList<Token> codeProposedCode = proposedCode.getCode();
 
         int deads = 0;
@@ -39,9 +39,11 @@ public class SecretCode extends Code {
             }
         }
 
-        return new Result(deads,woundeds);
+        return new Result(deads, woundeds);
     }
 
-    public ArrayList<Token> getSecretCode() { return code; }
+    public ArrayList<Token> getSecretCode() {
+        return code;
+    }
 
 }

@@ -11,7 +11,7 @@ public class Result {
         this.woundeds = woundeds;
     }
 
-    boolean isWinner(){
+    boolean isWinner() {
         return (this.deads == CODE_SIZE);
     }
 

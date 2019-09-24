@@ -9,7 +9,7 @@ class ResultView {
         this.result = result;
     }
 
-    void print(){
-        System.out.print(" | Heridos: "+ result.getWoundeds() + " | Muertos: "+result.getDeads());
+    void print() {
+        System.out.print(" | Heridos: " + result.getWoundeds() + " | Muertos: " + result.getDeads());
     }
 }

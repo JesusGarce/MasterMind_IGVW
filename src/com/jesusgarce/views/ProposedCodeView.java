@@ -9,7 +9,7 @@ class ProposedCodeView {
         this.proposedCode = proposedCode;
     }
 
-    void print(){
+    void print() {
         System.out.print(proposedCode.getCode().toString());
     }
 }
