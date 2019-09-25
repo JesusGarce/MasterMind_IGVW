@@ -89,7 +89,7 @@ Nuestro código tiene violaciones de la legibilidad:
 
 * No se han cumplido los estándares de la industria en algunos casos, como en el retorno del método checkAttempts() que en caso de error no retorna -1, sino 1.
 
-== Segunda iteración
+== Segunda iteración [Diseño]
 
 === Introducción
 
@@ -165,7 +165,7 @@ Existen clases de datos que solo tienen métodos Get/Set sin ninguna otra respon
 No se debe enviar nunca a otros objetos indirectos obtenidos como resultado de un mensaje a un objeto de conocimiento directo.
 Este caso era muy común en nuestro cógido y por tanto, hemos intentado evitar tratar con un objeto que ha sido pedido mediante método Get.
 
-== Tercera iteración
+== Tercera iteración [Diseño Modular]
 
 === Introducción
 
@@ -190,7 +190,6 @@ La otra es el enumerador Token, el cual simplemente no es necesario tener una cl
 [caption="Figure 3: "]
 image::UML-v3.png[Diagrama de clases tercera versión]
 
-
 Hemos considerado algunos cambios en el diseño con respecto a las iteraciones anteriores debido a que cuadran mejor con nuestra idea del juego MasterMind.
 Ahora, el conjunto de códigos propuestos lo almacena la clase Game en lugar de almacenarlo la clase SecretCode como haciamos anteriormente, ya que no considerabamos que gestionar los códigos propuestos fuera trabajo del código secreto.
 La responsabilidad de esta clase es decir el resultado de ese código propuesto, pero no almacenarlo.
@@ -208,4 +207,48 @@ Esta clase Code se relaciona también con el enumerado Token con una relación d
 
 Por último, hemos disminuido el tamaño de las clases y/o métodos que teniamos más grandes dividiendolos en funciones o asignando responsabilidades a otras clases.
 Es el caso de GameView, que es nuestro método más grande pero ya no tiene más de 25 líneas de código.
+
+== Cuarta iteración [Diseño Orientado a Objetos]
+
+=== Introducción
+
+En esta iteración tenemos ya un código orientado a objetos en el que tenemos clases de datos que realizan
+todas las operaciones y clases vista que se encargan de mostrar estos datos al usuario por consola.
+En esta nueva versión existen controladores que conecta el modelo de datos con el modelo vista, implementando
+el conocido Modelo-Vista-Controlador.
+
+=== Diseño
+
+Como podemos ver en la Figura 4, hemos implementado una clase abstracta Controller a partir de la cual
+hemos definido tres clases, StartController el cual se ejecuta cuando comienza la partida, ProposeController
+la cual se ejecuta mientras se estan proponiendo códigos, y, por último, la clase ResumeController que
+actúa al terminar la partida.
+
+.Diagrama de clases de la cuarta versión de MasterMind
+[#img-third-mastermind]
+[caption="Figure 4: "]
+image::UML-v4.png[Diagrama de clases cuarta versión]
+
+Para gestionar estos controladores se ha implementado la clase Logic que se encarga de la lógica del programa,
+la cual antes estaba implementada en la vista GameView. Esta implementación no tenía mucho sentido ya que
+las vistas deben ser clases tontas incapaces de llevar ningún tipo de lógica. En la clase Logic tenemos
+un HashMap de todos los controladores con el estado State al que le corresponde estar. Para saber que controlador
+tiene que actuar en cada caso se ha realizado una implementación de la técnica del Doble Despacho, implementando
+un método visit para cada Controller en ConsoleView. Para poder crear en el futuro otro tipo de vistas
+hemos implementado una clase abstracta View con los métodos visit correspondiente a cada Controller, y
+ConsoleView hereda de View. La clase abstracta Controller tiene el método abstracto accept(View view) para
+aceptar la vista y llevar a cabo esta técnica.
+
+Hemos creado también un enumerado State para definir el estado de nuestro MasterMind, los posibles estados son:
+STARTING, PLAYING, FINISHING y EXIT. A partir de la clase StateManager gestionamos estos estados. Los
+controladores son los encargados de cambiar de estado dentro del juego.
+
+Además de este enumerado, se ha creado un enumerado ProposedCodeState para, según el resultado de la
+propuesta, la clase ConsoleView imprima algo por pantalla. Por ejemplo, en caso de ganar la partida
+el ProposedCodeState sera WINNER y la clase ConsoleView imprimira el mensaje "HAS GANADO!". Los posibles
+estados son BAD_LENGTH, BAD_CHARACTERS, WITHOUT_ATTEMPTS, WINNER y CONTINUE_PLAYING.
+
+La clase MasterMind ahora ejecuta el método play() hasta que llegamos al estado de EXIT, mientras que
+antes el bucle se realizaba en la clase GameView. Anteriormente la clase MasterMind solo le decia
+a la clase GameView que interactuará con los modelos de datos.
 
