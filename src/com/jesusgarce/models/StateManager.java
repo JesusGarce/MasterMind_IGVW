@@ -3,7 +3,7 @@ package com.jesusgarce.models;
 public class StateManager {
     private State state;
 
-    public StateManager(){
+    public StateManager() {
         state = State.STARTING;
     }
 

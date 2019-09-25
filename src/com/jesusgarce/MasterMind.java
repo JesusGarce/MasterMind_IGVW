@@ -1,6 +1,7 @@
 package com.jesusgarce;
 
-import com.jesusgarce.controllers.*;
+import com.jesusgarce.controllers.Controller;
+import com.jesusgarce.controllers.Logic;
 import com.jesusgarce.models.State;
 import com.jesusgarce.views.console.ConsoleView;
 

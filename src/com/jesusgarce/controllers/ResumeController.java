@@ -17,12 +17,11 @@ public class ResumeController extends Controller {
         view.visit(this);
     }
 
-    public void resume(boolean newGame){
-        if (newGame){
+    public void resume(boolean newGame) {
+        if (newGame) {
             game.initialize();
             stateManager.reset();
-        }
-        else
+        } else
             stateManager.next();
     }
 

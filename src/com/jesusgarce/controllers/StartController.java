@@ -9,7 +9,7 @@ import java.io.IOException;
 public class StartController extends Controller {
 
     public StartController(Game game, StateManager stateManager) {
-        super(game,stateManager);
+        super(game, stateManager);
     }
 
     @Override
@@ -17,7 +17,7 @@ public class StartController extends Controller {
         view.visit(this);
     }
 
-    public void start(){
+    public void start() {
         game.initialize();
         stateManager.next();
     }

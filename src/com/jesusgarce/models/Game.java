@@ -19,8 +19,8 @@ public class Game {
         this.proposedCodes = new ArrayList<>();
     }
 
-    public boolean createProposedCode(String proposedCodeString) {
-        ProposedCode proposedCode = new ProposedCode(proposedCodeString);
+    public boolean createProposedCode(String stringProposedCode) {
+        ProposedCode proposedCode = new ProposedCode(stringProposedCode);
 
         if (proposedCode.codeIsEmpty())
             return false;

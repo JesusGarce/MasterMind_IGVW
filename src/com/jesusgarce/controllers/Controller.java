@@ -1,6 +1,9 @@
 package com.jesusgarce.controllers;
 
-import com.jesusgarce.models.*;
+import com.jesusgarce.models.Game;
+import com.jesusgarce.models.ProposedCode;
+import com.jesusgarce.models.SecretCode;
+import com.jesusgarce.models.StateManager;
 import com.jesusgarce.views.View;
 
 import java.io.IOException;
@@ -17,19 +20,19 @@ public abstract class Controller {
 
     public abstract void accept(View view) throws IOException;
 
-    public int getAttempts(){
+    public int getAttempts() {
         return game.getAttempts();
     }
 
-    public ArrayList<ProposedCode> getProposedCodes(){
+    public ArrayList<ProposedCode> getProposedCodes() {
         return game.getProposedCodes();
     }
 
-    public void addAtempt(){
+    public void addAtempt() {
         game.addAtempt();
     }
 
-    public SecretCode getSecretCode(){
+    public SecretCode getSecretCode() {
         return this.game.getSecretCode();
     }
 

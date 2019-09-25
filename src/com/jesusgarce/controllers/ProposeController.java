@@ -9,7 +9,7 @@ import java.io.IOException;
 public class ProposeController extends Controller {
 
     public ProposeController(Game game, StateManager stateManager) {
-        super(game,stateManager);
+        super(game, stateManager);
     }
 
     @Override
@@ -17,32 +17,31 @@ public class ProposeController extends Controller {
         view.visit(this);
     }
 
-    public ProposedCodeState propose(String stringProposedCode){
+    public ProposedCodeState propose(String stringProposedCode) {
         if (createProposedCode(stringProposedCode)) {
             addAtempt();
             if (isWinner()) {
                 stateManager.next();
                 return ProposedCodeState.WINNER;
-            } else
-                if (!anyAttemptRemained()) {
-                    stateManager.next();
-                    return ProposedCodeState.WITHOUT_ATTEMPTS;
-                }
+            } else if (!anyAttemptRemained()) {
+                stateManager.next();
+                return ProposedCodeState.WITHOUT_ATTEMPTS;
+            }
         } else
             return ProposedCodeState.BAD_CHARACTERS;
 
         return ProposedCodeState.CONTINUE_PLAYING;
     }
 
-    private boolean isWinner(){
+    private boolean isWinner() {
         return this.game.isWinner();
     }
 
-    private boolean createProposedCode(String proposedCodeString){
-        return this.game.createProposedCode(proposedCodeString);
+    private boolean createProposedCode(String stringProposedCode) {
+        return this.game.createProposedCode(stringProposedCode);
     }
 
-    private boolean anyAttemptRemained(){
+    private boolean anyAttemptRemained() {
         return this.game.anyAttemptsRemained();
     }
 

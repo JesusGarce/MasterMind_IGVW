@@ -1,10 +1,6 @@
 package com.jesusgarce.views.console;
 
-import com.jesusgarce.controllers.Controller;
-import com.jesusgarce.controllers.ProposeController;
-import com.jesusgarce.controllers.ResumeController;
-import com.jesusgarce.controllers.StartController;
-import com.jesusgarce.controllers.ProposedCodeState;
+import com.jesusgarce.controllers.*;
 import com.jesusgarce.views.View;
 
 import java.io.BufferedReader;
@@ -75,8 +71,8 @@ public class ConsoleView extends View {
         }
     }
 
-    private void printProposedState(){
-        switch (proposedCodeState){
+    private void printProposedState() {
+        switch (proposedCodeState) {
             case BAD_LENGTH:
                 System.out.println("El código debe tener 4 caracteres.");
                 break;
@@ -84,10 +80,10 @@ public class ConsoleView extends View {
                 System.out.println("Tu respuesta solo debe contenter los caracteres 'R, B, Y, G, O, P' y no puedes repetir ninguno.");
                 break;
             case WITHOUT_ATTEMPTS:
-                System.out.println("¡HAS PERDIDO! Consumiste todos tus intentos. La partida se ha acabado. El código era: "+secretCodeView.print());
+                System.out.println("¡HAS PERDIDO! Consumiste todos tus intentos. La partida se ha acabado. El código era: " + secretCodeView.print());
                 break;
             case WINNER:
-                System.out.println("¡HAS GANADO! Has usado "+controller.getAttempts()+" intentos.");
+                System.out.println("¡HAS GANADO! Has usado " + controller.getAttempts() + " intentos.");
                 break;
             case CONTINUE_PLAYING:
                 break;
