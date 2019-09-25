@@ -36,10 +36,6 @@ public class Game {
         return proposedCodes.remove(proposedCodes.size() - 1);
     }
 
-    public ProposedCode getLastProposedCode() {
-        return proposedCodes.get(proposedCodes.size()-1);
-    }
-
     public void addAtempt() {
         attempts++;
     }
@@ -53,7 +49,7 @@ public class Game {
         return proposedCode.isWinner();
     }
 
-    public boolean attemptsRemained() {
+    public boolean anyAttemptsRemained() {
         return (attempts < MAX_ATTEMPTS);
     }
 

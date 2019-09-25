@@ -1,4 +1,4 @@
-package com.jesusgarce.views;
+package com.jesusgarce.views.console;
 
 import com.jesusgarce.models.Result;
 

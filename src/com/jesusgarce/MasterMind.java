@@ -1,25 +1,20 @@
 package com.jesusgarce;
 
-import com.jesusgarce.controllers.ProposeController;
-import com.jesusgarce.controllers.ResumeController;
-import com.jesusgarce.models.Game;
-import com.jesusgarce.views.GameView;
+import com.jesusgarce.controllers.*;
+import com.jesusgarce.models.State;
+import com.jesusgarce.views.console.ConsoleView;
 
 import java.io.IOException;
 
 public class MasterMind {
     public static final int CODE_SIZE = 4;
     public static final int MAX_ATTEMPTS = 10;
-    private GameView view;
-    private Game game;
-    private final ProposeController proposeController;
-    private final ResumeController resumeController;
+    private ConsoleView view;
+    private Logic logic;
 
     private MasterMind() {
-        this.game = new Game();
-        this.proposeController = new ProposeController(this.game);
-        this.resumeController = new ResumeController(this.game);
-        this.view = new GameView(resumeController,proposeController);
+        this.logic = new Logic();
+        this.view = new ConsoleView(logic.getController());
     }
 
     public static void main(String[] args) throws IOException {
@@ -27,7 +22,11 @@ public class MasterMind {
     }
 
     void play() throws IOException {
-        view.interact();
+        Controller controller;
+        do {
+            controller = this.logic.getController();
+            controller.accept(view);
+        } while (!logic.getState().equals(State.EXIT));
     }
 }
 

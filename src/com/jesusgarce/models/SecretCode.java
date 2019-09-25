@@ -42,8 +42,4 @@ public class SecretCode extends Code {
         return new Result(deads, woundeds);
     }
 
-    public ArrayList<Token> getSecretCode() {
-        return code;
-    }
-
 }
