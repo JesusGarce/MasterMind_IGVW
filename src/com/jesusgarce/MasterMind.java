@@ -1,9 +1,9 @@
 package com.jesusgarce;
 
-import src.com.jesusgarce.controllers.ProposeController;
-import src.com.jesusgarce.controllers.ResumeController;
-import src.com.jesusgarce.models.Game;
-import src.com.jesusgarce.views.GameView;
+import com.jesusgarce.controllers.ProposeController;
+import com.jesusgarce.controllers.ResumeController;
+import com.jesusgarce.models.Game;
+import com.jesusgarce.views.GameView;
 
 import java.io.IOException;
 
@@ -17,9 +17,9 @@ public class MasterMind {
 
     private MasterMind() {
         this.game = new Game();
-        this.view = new GameView(this.game);
         this.proposeController = new ProposeController(this.game);
         this.resumeController = new ResumeController(this.game);
+        this.view = new GameView(resumeController,proposeController);
     }
 
     public static void main(String[] args) throws IOException {

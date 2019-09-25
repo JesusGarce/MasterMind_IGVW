@@ -1,8 +1,8 @@
-package src.com.jesusgarce.models;
+package com.jesusgarce.models;
 
 import java.util.ArrayList;
 
-import static src.com.jesusgarce.MasterMind.MAX_ATTEMPTS;
+import static com.jesusgarce.MasterMind.MAX_ATTEMPTS;
 
 public class Game {
     private SecretCode secretCode;
@@ -32,8 +32,12 @@ public class Game {
         return proposedCodes.add(proposedCode);
     }
 
-    public ProposedCode getLastProposedCode() {
+    private ProposedCode removeLastProposedCode() {
         return proposedCodes.remove(proposedCodes.size() - 1);
+    }
+
+    public ProposedCode getLastProposedCode() {
+        return proposedCodes.get(proposedCodes.size()-1);
     }
 
     public void addAtempt() {
@@ -41,7 +45,7 @@ public class Game {
     }
 
     public boolean isWinner() {
-        ProposedCode proposedCode = this.getLastProposedCode();
+        ProposedCode proposedCode = this.removeLastProposedCode();
         proposedCode.setResult(secretCode.checkProposedCode(proposedCode));
 
         this.saveProposedCode(proposedCode);

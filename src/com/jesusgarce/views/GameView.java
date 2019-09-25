@@ -1,14 +1,14 @@
-package src.com.jesusgarce.views;
+package com.jesusgarce.views;
 
-import src.com.jesusgarce.controllers.ProposeController;
-import src.com.jesusgarce.controllers.ResumeController;
+import com.jesusgarce.controllers.ProposeController;
+import com.jesusgarce.controllers.ResumeController;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import static src.com.jesusgarce.MasterMind.CODE_SIZE;
-import static src.com.jesusgarce.MasterMind.MAX_ATTEMPTS;
+import static com.jesusgarce.MasterMind.CODE_SIZE;
+import static com.jesusgarce.MasterMind.MAX_ATTEMPTS;
 
 public class GameView {
     private boolean playing = true;
@@ -79,8 +79,8 @@ public class GameView {
 
     private void printProposedCodesArray() {
         for (int i = 0; i < proposeController.getProposedCodes().size(); i++) {
-            ProposedCodeView proposedCodeView = new ProposedCodeView(proposeController);
-            ResultView resultView = new ResultView(proposeController);
+            ProposedCodeView proposedCodeView = new ProposedCodeView(proposeController.getProposedCodes().get(i));
+            ResultView resultView = new ResultView(proposeController.getProposedCodes().get(i).getResult());
             System.out.print("Intento " + (i + 1) + ": ");
             proposedCodeView.print();
             resultView.print();

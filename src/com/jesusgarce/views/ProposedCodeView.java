@@ -1,15 +1,15 @@
-package src.com.jesusgarce.views;
+package com.jesusgarce.views;
 
-import src.com.jesusgarce.controllers.Controller;
+import com.jesusgarce.models.ProposedCode;
 
 class ProposedCodeView {
-    private Controller controller;
+    private ProposedCode proposedCode;
 
-    ProposedCodeView(Controller controller) {
-        this.controller = controller;
+    ProposedCodeView(ProposedCode proposedCode) {
+        this.proposedCode = proposedCode;
     }
 
     void print() {
-        System.out.print(controller.getLastProposedCode().getCode().toString());
+        System.out.print(proposedCode.getCode().toString());
     }
 }

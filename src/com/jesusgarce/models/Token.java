@@ -1,4 +1,4 @@
-package src.com.jesusgarce.models;
+package com.jesusgarce.models;
 
 public enum Token {
     R, B, Y, G, O, P;

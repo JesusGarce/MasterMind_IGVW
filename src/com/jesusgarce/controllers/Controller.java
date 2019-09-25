@@ -1,9 +1,9 @@
-package src.com.jesusgarce.controllers;
+package com.jesusgarce.controllers;
 
-import src.com.jesusgarce.models.Game;
-import src.com.jesusgarce.models.ProposedCode;
-import src.com.jesusgarce.models.Result;
-import src.com.jesusgarce.models.SecretCode;
+import com.jesusgarce.models.Game;
+import com.jesusgarce.models.ProposedCode;
+import com.jesusgarce.models.Result;
+import com.jesusgarce.models.SecretCode;
 
 import java.util.ArrayList;
 

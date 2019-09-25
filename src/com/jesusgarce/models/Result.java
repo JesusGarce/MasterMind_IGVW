@@ -1,6 +1,6 @@
-package src.com.jesusgarce.models;
+package com.jesusgarce.models;
 
-import static src.com.jesusgarce.MasterMind.CODE_SIZE;
+import static com.jesusgarce.MasterMind.CODE_SIZE;
 
 public class Result {
     private int deads;

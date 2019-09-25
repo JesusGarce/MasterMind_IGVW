@@ -1,6 +1,6 @@
-package src.com.jesusgarce.views;
+package com.jesusgarce.views;
 
-import src.com.jesusgarce.controllers.Controller;
+import com.jesusgarce.controllers.Controller;
 
 class SecretCodeView {
     protected final Controller controller;
