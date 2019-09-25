@@ -1,21 +1,24 @@
-package com.jesusgarce.views;
+package src.com.jesusgarce.views;
 
-import com.jesusgarce.models.Game;
+import src.com.jesusgarce.controllers.ProposeController;
+import src.com.jesusgarce.controllers.ResumeController;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import static com.jesusgarce.MasterMind.CODE_SIZE;
-import static com.jesusgarce.MasterMind.MAX_ATTEMPTS;
+import static src.com.jesusgarce.MasterMind.CODE_SIZE;
+import static src.com.jesusgarce.MasterMind.MAX_ATTEMPTS;
 
 public class GameView {
-    private Game game;
     private boolean playing = true;
     private boolean continuePlaying = true;
+    private final ResumeController resumeController;
+    private final ProposeController proposeController;
 
-    public GameView(Game game) {
-        this.game = game;
+    public GameView(ResumeController resumeController, ProposeController proposeController) {
+        this.proposeController = proposeController;
+        this.resumeController = resumeController;
     }
 
     public void interact() throws IOException {
@@ -28,28 +31,28 @@ public class GameView {
             while (playing) {
                 printProposedCodesArray();
 
-                System.out.println("Código a descubrir: **** | Intentos restantes: " + (MAX_ATTEMPTS - game.getAttempts()) + " | Dime tu código: ");
+                System.out.println("Código a descubrir: **** | Intentos restantes: " + (MAX_ATTEMPTS - proposeController.getAttempts()) + " | Dime tu código: ");
 
                 String stringProposedCode = br.readLine();
 
                 if (stringProposedCode.isEmpty() || stringProposedCode.length() != CODE_SIZE)
                     System.out.println("La longitud de tu respuesta no es válida, deben ser 4 caracteres");
                 else {
-                    if (game.createProposedCode(stringProposedCode)) {
-                        game.addAtempt();
-                        if (game.isWinner()) {
+                    if (proposeController.createProposedCode(stringProposedCode)) {
+                        proposeController.addAtempt();
+                        if (proposeController.isWinner()) {
                             playing = false;
-                            System.out.println("¡HAS GANADO! Usaste " + game.getAttempts() + " intentos.");
+                            System.out.println("¡HAS GANADO! Usaste " + proposeController.getAttempts() + " intentos.");
                         } else
-                            playing = game.attemptsRemained();
+                            playing = proposeController.attemptsRemained();
                     } else
                         System.out.println("Tu respuesta solo debe contenter los caracteres 'R, B, Y, G, O, P' y no puedes repetir ninguno.");
                 }
 
             }
 
-            if (!game.attemptsRemained())
-                System.out.println("¡HAS PERDIDO! Consumiste todos tus intentos. La partida se ha acabado. El código era: " + new SecretCodeView(game.getSecretCode()).print());
+            if (!proposeController.attemptsRemained())
+                System.out.println("¡HAS PERDIDO! Consumiste todos tus intentos. La partida se ha acabado. El código era: " + new SecretCodeView(proposeController).print());
 
             continuePlaying = printPlayAgain();
 
@@ -63,7 +66,7 @@ public class GameView {
         switch (answer) {
             case "S":
                 playing = true;
-                game.initialize();
+                resumeController.initialize();
                 return true;
             case "N":
                 return false;
@@ -75,9 +78,9 @@ public class GameView {
     }
 
     private void printProposedCodesArray() {
-        for (int i = 0; i < game.getProposedCodes().size(); i++) {
-            ProposedCodeView proposedCodeView = new ProposedCodeView(game.getProposedCodes().get(i));
-            ResultView resultView = new ResultView(game.getProposedCodes().get(i).getResult());
+        for (int i = 0; i < proposeController.getProposedCodes().size(); i++) {
+            ProposedCodeView proposedCodeView = new ProposedCodeView(proposeController);
+            ResultView resultView = new ResultView(proposeController);
             System.out.print("Intento " + (i + 1) + ": ");
             proposedCodeView.print();
             resultView.print();

@@ -1,8 +1,8 @@
-package com.jesusgarce.models;
+package src.com.jesusgarce.models;
 
 import java.util.ArrayList;
 
-import static com.jesusgarce.MasterMind.CODE_SIZE;
+import static src.com.jesusgarce.MasterMind.CODE_SIZE;
 
 public class ProposedCode extends Code {
     protected Result result;

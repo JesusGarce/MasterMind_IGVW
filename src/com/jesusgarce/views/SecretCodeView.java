@@ -1,16 +1,16 @@
-package com.jesusgarce.views;
+package src.com.jesusgarce.views;
 
-import com.jesusgarce.models.SecretCode;
+import src.com.jesusgarce.controllers.Controller;
 
 class SecretCodeView {
-    private SecretCode secretCode;
+    protected final Controller controller;
 
-    SecretCodeView(SecretCode secretCode) {
-        this.secretCode = secretCode;
+    SecretCodeView(Controller controller) {
+        this.controller = controller;
     }
 
     String print() {
-        return secretCode.getSecretCode().toString();
+        return controller.getSecretCode().toString();
     }
 
 }

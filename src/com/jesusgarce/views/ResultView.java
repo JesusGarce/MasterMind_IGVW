@@ -1,15 +1,15 @@
-package com.jesusgarce.views;
+package src.com.jesusgarce.views;
 
-import com.jesusgarce.models.Result;
+import src.com.jesusgarce.controllers.Controller;
 
 class ResultView {
-    private Result result;
+    private Controller controller;
 
-    ResultView(Result result) {
-        this.result = result;
+    ResultView(Controller controller) {
+        this.controller = controller;
     }
 
     void print() {
-        System.out.print(" | Heridos: " + result.getWoundeds() + " | Muertos: " + result.getDeads());
+        System.out.print(" | Heridos: " + controller.getResult().getWoundeds() + " | Muertos: " + controller.getResult().getDeads());
     }
 }
