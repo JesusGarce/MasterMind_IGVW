@@ -219,7 +219,8 @@ el conocido Modelo-Vista-Controlador.
 
 === Diseño
 
-Como podemos ver en la Figura 4, hemos implementado una clase abstracta Controller a partir de la cual
+Como podemos ver en la Figura 4, tenemos 20 clases Java, siendo 3 de ellas enumerados, separados en tres
+paquetes: models, views y controllers. Hemos implementado una clase abstracta Controller a partir de la cual
 hemos definido tres clases, StartController el cual se ejecuta cuando comienza la partida, ProposeController
 la cual se ejecuta mientras se estan proponiendo códigos, y, por último, la clase ResumeController que
 actúa al terminar la partida.
@@ -251,4 +252,12 @@ estados son BAD_LENGTH, BAD_CHARACTERS, WITHOUT_ATTEMPTS, WINNER y CONTINUE_PLAY
 La clase MasterMind ahora ejecuta el método play() hasta que llegamos al estado de EXIT, mientras que
 antes el bucle se realizaba en la clase GameView. Anteriormente la clase MasterMind solo le decia
 a la clase GameView que interactuará con los modelos de datos.
+
+Con respecto a las nuevas relaciones, existe una relación de composición entre los diversos controladores y
+la clase Logic. Las clases controladores tienen una relación de herencia con la clase Controller, la cual es su
+Clase padre. La clase MasterMind ahora se compone de la clase Logic y de la clase ConsoleView.
+La clase StateManager tiene una relación de asociación con la clase Logic y la clase Controller, y esta compuesta
+por un State. El enumerado ProposedCodeState tiene una relación de asociación
+con ProposeController y ProposedCode. Y, por último, la clase abstracta View, la cual esta asociada
+a la clase abstracta Controller, es la clase padre de ConsoleView.
 
