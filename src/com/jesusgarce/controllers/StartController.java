@@ -4,8 +4,6 @@ import com.jesusgarce.models.Game;
 import com.jesusgarce.models.StateManager;
 import com.jesusgarce.views.View;
 
-import java.io.IOException;
-
 public class StartController extends Controller {
 
     public StartController(Game game, StateManager stateManager) {
@@ -13,7 +11,7 @@ public class StartController extends Controller {
     }
 
     @Override
-    public void accept(View view) throws IOException {
+    public void accept(View view)  {
         view.visit(this);
     }
 
